@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   test:
+    fail-fast: false
     runs-on: ${{ matrix.os }}
 
     strategy:
