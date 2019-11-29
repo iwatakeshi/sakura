@@ -1,5 +1,5 @@
 # sakura
-An elegant data structure to build trees or cherry blossoms 🌸
+An elegant unit of a data structure to build trees or cherry blossoms 🌸
 
 ## About
 
