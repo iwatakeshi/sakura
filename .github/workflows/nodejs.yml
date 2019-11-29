@@ -9,14 +9,14 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        node-version: [10.x, 12.x, 13.x]
+        node: [10.x, 12.x, 13.x]
 
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node: ${{ matrix.node }}
       - name: Setup yarn
         run: npm i -g yarn
 
@@ -35,7 +35,7 @@ jobs:
         env:
           CI: true
       - name: Codecov
-        if: matrix.os == 'ubuntu-latest' && contains(matrix.os, '13')
+        if: matrix.os == 'ubuntu-latest' && contains(matrix.node, '13')
         uses: codecov/codecov-action@v1.0.4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
