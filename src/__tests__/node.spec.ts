@@ -225,10 +225,12 @@ describe('node', () => {
 
     test('search', () => {
       const e = new Node('e', '5', false)
-      expect.assertions(5)
+      expect.assertions(6)
       a.push(b)
       b.push(c)
       c.push(d)
+
+      expect(a.search('1')).toEqual(a)
       expect(a.search('2')).toEqual(b)
       expect(b.search('3')).toEqual(c)
       expect(c.search('4')).toEqual(d)

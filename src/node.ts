@@ -65,6 +65,10 @@ export class Node {
    * @param id The id of the node to search for.
    */
   static search(node: Node, id: string): Maybe<Node> {
+    if (node.id === id) {
+      return node
+    }
+
     const queue = [node]
 
     while (queue.length !== 0) {
