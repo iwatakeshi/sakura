@@ -35,7 +35,7 @@ jobs:
         env:
           CI: true
       - name: Codecov
-        if: matrix.os === 'ubuntu-latest' && contains(matrix.os, '13')
+        if: matrix.os == 'ubuntu-latest' && contains(matrix.os, '13')
         uses: codecov/codecov-action@v1.0.4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
