@@ -19,13 +19,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Yarn install, build, test
-        uses: Borales/actions-yarn@v2.1.0
+        uses: KingScooty/actions-yarn-cy@1.0.0
         with:
           cmd: install
-      - uses: borales/actions-yarn@v2.0.0
+      - uses: uses: KingScooty/actions-yarn-cy@1.0.0
         with:
           cmd: build
-      - uses: borales/actions-yarn@v2.0.0
+      - uses: uses: KingScooty/actions-yarn-cy@1.0.0
         with:
           cmd: test
         env:
