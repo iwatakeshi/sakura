@@ -1,5 +1,5 @@
 # sakura
-An elegant unit of a data structure to build trees or cherry blossoms 🌸
+A unit of a data structure to build elegant trees or cherry blossoms 🌸
 
 [![Node CI](https://github.com/iwatakeshi/sakura/workflows/Node%20CI/badge.svg)](https://github.com/iwatakeshi/sakura/actions?query=workflow%3A%22Node+CI%22)
 [![Version](https://img.shields.io/npm/v/@iwatakeshi/sakura.svg)](https://www.npmjs.com/package/@iwatakeshi/sakura)
