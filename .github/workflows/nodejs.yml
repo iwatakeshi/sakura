@@ -18,16 +18,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Yarn install, build, test
-        uses: KingScooty/actions-yarn-cy@1.0.0
-        with:
-          cmd: install
-      - uses: KingScooty/actions-yarn-cy@1.0.0
-        with:
-          cmd: build
-      - uses: KingScooty/actions-yarn-cy@1.0.0
-        with:
-          cmd: test
+      - name: yarn install, build, and test
+        run: |
+          npm i -g yarn
+          yarn install
+          yarn build
+          yarn test
         env:
           CI: true
       - name: Codecov
