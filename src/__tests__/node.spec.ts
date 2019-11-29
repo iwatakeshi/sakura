@@ -1,5 +1,4 @@
-import Node from '../main'
-import { NodeSchema } from '../node'
+import { Node, NodeSchema } from '../main'
 
 describe('node', () => {
   describe('init', () => {

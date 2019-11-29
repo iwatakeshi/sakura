@@ -17,7 +17,7 @@ export interface NodeSchema {
 /**
  * Node is a class to define a tree or a cherry blossom.
  */
-class Node {
+export class Node {
   /**
    * Returns the depth of the node.
    */
@@ -276,5 +276,3 @@ class Node {
     this._parent = parent
   }
 }
-
-export default Node

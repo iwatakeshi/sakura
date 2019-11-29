@@ -13,9 +13,9 @@ Sakura has an elegant `Node` class that wraps some of the familiar APIs we use f
 Here's an example:
 
 ```typescript
-import Node from '@iwatakeshi/sakura'
+import { Node } from '@iwatakeshi/sakura'
 // Note: If you use require(), then it's:
-// const Node = require('@iwatakeshi/sakura').default
+// const { Node } = require('@iwatakeshi/sakura')
 
 // Let's make a root node and give it a name
 // of 'a' and an id of '123'
