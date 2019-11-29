@@ -2,10 +2,10 @@
 A unit of a data structure to build elegant trees or cherry blossoms 🌸
 
 [![Node CI](https://github.com/iwatakeshi/sakura/workflows/Node%20CI/badge.svg)](https://github.com/iwatakeshi/sakura/actions?query=workflow%3A%22Node+CI%22)
+![Codecov](https://img.shields.io/codecov/c/github/iwatakeshi/sakura)
 [![Version](https://img.shields.io/npm/v/@iwatakeshi/sakura.svg)](https://www.npmjs.com/package/@iwatakeshi/sakura)
 [![Downloads/week](https://img.shields.io/npm/dw/@iwatakeshi/sakura.svg)](https://www.npmjs.com/package/@iwatakeshi/sakura)
 [![License](https://img.shields.io/github/license/iwatakeshi/sakura)](https://github.com/iwatakeshi/sakura/blob/master/LICENSE.md)
-
 ## About
 
 Sakura has an elegant `Node` class that wraps some of the familiar APIs we use for arrays. However, instead of arrays, we're dealing with nodes.
