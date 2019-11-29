@@ -230,7 +230,7 @@ class Node {
 ### NodeSchema
 
 ```typescript
-export interface NodeSchema {
+interface NodeSchema {
   id: string
   name: string
   children: NodeSchema[]
