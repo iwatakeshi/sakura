@@ -28,5 +28,6 @@ jobs:
           CI: true
       - name: Codecov
         uses: codecov/codecov-action@v1.0.4
+        if: matrix.os != 'windows-latest' && matrix.os  != 'macos-latest'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
