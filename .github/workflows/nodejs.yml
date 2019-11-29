@@ -7,7 +7,6 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
-      # fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         node-version: [10.x, 12.x, 13.x]
@@ -36,6 +35,7 @@ jobs:
         env:
           CI: true
       - name: Codecov
+        if: matrix.os === 'ubuntu-latest' && contains(matrix.os, '13')
         uses: codecov/codecov-action@v1.0.4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
