@@ -22,10 +22,10 @@ jobs:
         uses: KingScooty/actions-yarn-cy@1.0.0
         with:
           cmd: install
-      - uses: uses: KingScooty/actions-yarn-cy@1.0.0
+      - uses: KingScooty/actions-yarn-cy@1.0.0
         with:
           cmd: build
-      - uses: uses: KingScooty/actions-yarn-cy@1.0.0
+      - uses: KingScooty/actions-yarn-cy@1.0.0
         with:
           cmd: test
         env:
