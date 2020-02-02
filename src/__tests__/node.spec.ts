@@ -2,38 +2,38 @@ import { Node, NodeSchema } from '../main'
 
 describe('node', () => {
   describe('init', () => {
-    const a = new Node('a', '1', true)
-    const b = new Node('b', '2', false)
-    const x = new Node('x', '10')
+    const a = new Node('1', 'a', true)
+    const b = new Node('2', 'b', false)
+    const x = new Node('10', 'x')
     test('create a root node', () => {
       expect.assertions(3)
       expect(a.id).toBe('1')
-      expect(a.name).toBe('a')
+      expect(a.data).toBe('a')
       expect(a.isRoot).toBe(true)
     })
 
     test('create a leaf node', () => {
       expect.assertions(6)
       expect(b.id).toBe('2')
-      expect(b.name).toBe('b')
+      expect(b.data).toBe('b')
       expect(b.isRoot).toBe(false)
 
       expect(x.id).toBe('10')
-      expect(x.name).toBe('x')
+      expect(x.data).toBe('x')
       expect(x.isRoot).toBe(false)
     })
   })
 
   describe('methods', () => {
-    let a = new Node('a', '1', true)
-    let b = new Node('b', '2', false)
-    let c = new Node('c', '3', false)
-    let d = new Node('d', '4', false)
+    let a = new Node('1', 'a', true)
+    let b = new Node('2', 'b', false)
+    let c = new Node('3', 'c', false)
+    let d = new Node('4', 'd', false)
     beforeEach(() => {
-      a = new Node('a', '1', true)
-      b = new Node('b', '2', false)
-      c = new Node('c', '3', false)
-      d = new Node('d', '4', false)
+      a = new Node('1', 'a', true)
+      b = new Node('2', 'b', false)
+      c = new Node('3', 'c', false)
+      d = new Node('4', 'd', false)
     })
 
     test('push', () => {
@@ -91,7 +91,7 @@ describe('node', () => {
 
       const makeSchema = (node: Node) => ({
         id: node.id,
-        name: node.name,
+        data: node.data,
         index: node.index,
         depth: node.depth,
         isRoot: node.isRoot,
@@ -105,14 +105,14 @@ describe('node', () => {
         return makeSchema(node!)
       })).toEqual([{
         id: '2',
-        name: 'b',
+        data: 'b',
         index: 0,
         depth: 1,
         isRoot: false,
         isParent: true,
         children: [{
           id: '3',
-          name: 'c',
+          data: 'c',
           index: 0,
           depth: 2,
           isRoot: false,
@@ -183,7 +183,7 @@ describe('node', () => {
       a.push(b)
       expect(a.serialize()).toEqual({
         id: '1',
-        name: 'a',
+        data: 'a',
         isRoot: true,
         isParent: true,
         index: 0,
@@ -192,7 +192,7 @@ describe('node', () => {
           index: 0,
           depth: 1,
           id: '2',
-          name: 'b',
+          data: 'b',
           isRoot: false,
           isParent: false,
           children: [] as any
@@ -205,7 +205,7 @@ describe('node', () => {
       a.push(b)
       const schema = {
         id: '1',
-        name: 'a',
+        data: 'a',
         isRoot: true,
         isParent: true,
         index: 0,
@@ -214,7 +214,7 @@ describe('node', () => {
           index: 0,
           depth: 1,
           id: '2',
-          name: 'b',
+          data: 'b',
           isRoot: false,
           isParent: false,
           children: [] as any
@@ -224,7 +224,7 @@ describe('node', () => {
     })
 
     test('search', () => {
-      const e = new Node('e', '5', false)
+      const e = new Node('5', 'e', false)
       expect.assertions(6)
       a.push(b)
       b.push(c)
