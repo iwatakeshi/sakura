@@ -155,7 +155,7 @@ export class Node<T = any> {
   }
 
   /**
-   * Removes the last child from an array and returns it.
+   * Removes the last child of the node and returns it.
    */
   pop() {
     return this.children.pop()
