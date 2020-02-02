@@ -134,9 +134,9 @@ export class Node<T = any> {
   private readonly _isRoot: boolean
   /**
    * The Node constructor.
-   * @param id The id of the node.
+   * @param id A unique identifier for the node.
    * @param data The payload for the node.
-   * @param options The options for the node
+   * @param isRoot Sets the node as the root.
    */
   constructor(id: string, data?: T, isRoot = false) {
     this._id = id
