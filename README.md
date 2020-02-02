@@ -18,12 +18,12 @@ import { Node } from '@iwatakeshi/sakura'
 // const { Node } = require('@iwatakeshi/sakura')
 
 // Let's make a root node and give it a name
-// of 'a' and an id of '123'
-const a = new Node('a', '123', true)
+// of 'a' and an id of '1'
+const a = new Node('1', 'a', true)
 
 // Let's create two other leaf nodes
-const b = new Node('b', '345')
-const c = new Node('c', '567')
+const b = new Node('2', 'b')
+const c = new Node('3', 'c')
 
 // Add 'b' as a child of 'a'
 a.push(b)
@@ -31,7 +31,7 @@ a.push(b)
 b.push(c)
 
 // Let's search for 'c'!
-console.log(a.search('567'))
+console.log(a.search('3'))
 // => 
 // Node {
 //   isRoot: false,
@@ -52,12 +52,12 @@ What if we wanted to get the index or the depth of a child node?
 ```typescript
 // continued...
 
-const d = new Node('d', '789')
-const e = new Node('e', '91011')
+const d = new Node('4', 'd')
+const e = new Node('5', 'e')
 
 b.push(d)
 b.push(e)
-const result = a.search('91011')
+const result = a.search('5')
 console.log(result.index)
 // => 2
 console.log(result.depth)
@@ -69,16 +69,16 @@ Of course, we can have some fun by manipulating some children:
 ```typescript
 // continued...
 
-const f = new Node('f', '111213')
-const g = new Node('g', '131415')
+const f = new Node('6', 'f')
+const g = new Node('7', 'g')
 
 e.push(f)
 e.push(g)
 
 console.log(
-  a.search('345')
-   .find(node => node!.id === '91011')
-   .map(node => node!.name)
+  a.search('2')
+   .find(node => node!.id === '5')
+   .map(node => node!.data)
  )
 // => ['f', 'g']
 ```
@@ -90,7 +90,7 @@ By now, I think you get the idea...
 ### Node
 
 ```typescript
-class Node {
+class Node<T = any> {
 
   /**
    * The Node constructor
@@ -98,7 +98,7 @@ class Node {
    * @param isRoot Sets the node as the root.
    * @param id A unique identifier for the node.
    */
-  constructor(name: string, readonly id: string, readonly isRoot: boolean = false);
+  constructor(id: string, data?: T, isRoot = false)
 
   /**
    * Appends a child to the node, and returns the new length of the node's children.
@@ -235,9 +235,9 @@ class Node {
 ### NodeSchema
 
 ```typescript
-interface NodeSchema {
+interface NodeSchema<T = any> {
   id: string
-  name: string
+  data?: T
   children: NodeSchema[]
   isRoot: boolean
   isParent: boolean
