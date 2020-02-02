@@ -4,9 +4,9 @@ type Maybe<T> = T | null | undefined
 /**
  * NodeSchema is an interface that describes the schema of a serialized node.
  */
-export interface NodeSchema {
+export interface NodeSchema<T = any> {
   id: string
-  name: string
+  data?: T
   children: NodeSchema[]
   isRoot: boolean
   isParent: boolean
@@ -17,7 +17,14 @@ export interface NodeSchema {
 /**
  * Node is a class to define a tree or a cherry blossom.
  */
-export class Node {
+export class Node<T = any> {
+  /**
+   * Returns the id of the node.
+   */
+  get id(): string {
+    return this._id
+  }
+
   /**
    * Returns the depth of the node.
    */
@@ -56,6 +63,13 @@ export class Node {
    */
   get isParent(): boolean {
     return this.children.length > 0
+  }
+
+  /**
+   * Determines whether the node is a root node.
+   */
+  get isRoot(): boolean {
+    return this._isRoot
   }
   /**
    * Deeply searches for a child node.
@@ -97,7 +111,7 @@ export class Node {
    */
   static deserialize(schema: NodeSchema): Node {
     return [schema].map(s => {
-      const parent = new Node(s.name, s.id, s.isRoot)
+      const parent = new Node(s.id, s.data, s.isRoot)
       parent.children = s.children.map(Node.deserialize)
       parent.children = parent.children.map(child => {
         child!.setParent(parent)
@@ -106,26 +120,28 @@ export class Node {
       return parent
     })[0]
   }
-
   /**
-   * A label for the node.
+   * The data of the node.
    */
-  name: string
+  data?: T
   /**
    * Children of the node.
    */
   children: Array<Maybe<Node>>
   // tslint:disable-next-line: variable-name
   private _parent: Maybe<Node>
+  private readonly _id: string
+  private readonly _isRoot: boolean
   /**
-   * The Node constructor
-   * @param name A label for the node.
-   * @param isRoot Sets the node as the root.
-   * @param id A unique identifier for the node.
+   * The Node constructor.
+   * @param id The id of the node.
+   * @param data The payload for the node.
+   * @param options The options for the node
    */
-  constructor(name: string, readonly id: string, readonly isRoot: boolean = false) {
-    this.name = name
-    this.id = id
+  constructor(id: string, data?: T, isRoot = false) {
+    this._id = id
+    this.data = data
+    this._isRoot = isRoot
     this.children = []
   }
 
@@ -243,7 +259,7 @@ export class Node {
   serialize(): NodeSchema {
     const makeSchema = (node: Maybe<Node>) => ({
       id: node!.id,
-      name: node!.name,
+      data: node!.data,
       index: node!.index,
       depth: node!.depth,
       isRoot: node!.isRoot,
