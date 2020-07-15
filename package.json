@@ -1,6 +1,6 @@
 {
   "name": "@iwatakeshi/sakura",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A unit of a data structure to build elegant trees or cherry blossoms",
   "main": "lib/main.js",
   "repository": "github:iwatakeshi/sakura",
