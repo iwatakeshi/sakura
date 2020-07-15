@@ -9,16 +9,14 @@
   "files": [
     "lib/**/*"
   ],
-  "dependencies": {
-    "@types/jest": "^24.0.22",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.1.0"
-  },
   "devDependencies": {
     "@oclif/tslint": "^3.1.1",
-    "@types/node": "^12.12.7",
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "@types/jest": "^26.0.4",
+    "@types/node": "^14.0.23",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.2",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.6"
   },
   "scripts": {
     "prepare": "yarn build",
