@@ -62,6 +62,6 @@ typings/
 
 # Typescript
 lib/
-
+dist/
 # Parcel
 .parcel-cache/
