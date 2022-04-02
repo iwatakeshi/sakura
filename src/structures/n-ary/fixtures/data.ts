@@ -1,14 +1,15 @@
-import { fromData } from "~/structures/n-ary/utils/node";
 import { Data } from "~/structures/n-ary/fixtures/types";
 
+import { fromList } from "~/structures/n-ary/utils/node";
 
-export const shallow = fromData<Data>([
+
+export const shallow = fromList<Data>([
   { id: '1', children: [] },
   { id: '2', children: [] },
   { id: '3', children: [] },
 ])
 
-export const semideep = fromData<Data>([
+export const semideep = fromList<Data>([
   {
     id: '1',
     children: [
@@ -25,7 +26,7 @@ export const semideep = fromData<Data>([
   },
 ])
 
-export const deep = fromData<Data>([
+export const deep = fromList<Data>([
   {
     id: '1',
     value: '1',

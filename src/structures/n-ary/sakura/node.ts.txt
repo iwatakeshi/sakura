@@ -1,0 +1,63 @@
+import { Nullable } from "~src/shared/types/ts";
+import { INode } from "~src/shared/types/node";
+import { Key } from "~src/shared/types/key";
+import { walk } from "~src/structures/n-ary/utils/traverse";
+
+interface ISakuraNode<T = any> extends INode<T> {
+  parent: Nullable<Key>
+  children: ISakuraNode<T>[]
+  index: number
+  depth: number
+  readonly isRoot: boolean
+  readonly hasChild: boolean
+}
+
+interface ISakuraNodeExtension<T = any> {
+  map<U>(fn: (node: ISakuraNode<T>) => U): U[]
+  filter(fn: (node: ISakuraNode<T>) => boolean): ISakuraNode<T>[]
+  find(fn: (node: ISakuraNode<T>) => boolean): Nullable<ISakuraNode<T>>
+  findIndex(fn: (node: ISakuraNode<T>) => boolean): Nullable<number>
+  reduce<U>(fn: (acc: U, node: ISakuraNode<T>) => U, init: U): U
+}
+
+export class SakuraNode<T = any> implements ISakuraNode<T>, ISakuraNodeExtension<T> {
+  key: Key
+  value: T
+  parent: Nullable<Key>
+  children: SakuraNode[]
+  index: number;
+  depth: number;
+  constructor(key: Key = null, value: T, parent: Nullable<Key> = null, children: SakuraNode[] = [], index: number = 0, depth: number = 0) {
+    this.key = key
+    this.value = value
+    this.parent = parent
+    this.children = []
+    this.index = index
+    this.depth = depth
+  }
+  
+  get isRoot() {
+    return this.parent === null && this.key === null
+  }
+  get hasChild() {
+    return this.children.length > 0
+  }
+  
+  map<U>(fn: (node: SakuraNode<T>) => U): U[] {
+    return this.children.map(fn)
+  }
+  filter(fn: (node: SakuraNode<T>) => boolean): SakuraNode[] {
+    return this.children.filter(fn)
+  }
+  find(fn: (node: SakuraNode<T>) => boolean): Nullable<SakuraNode<T>> {
+    return this.children.find(fn)
+  }
+  findIndex(fn: (node: SakuraNode<T>) => boolean): Nullable<number> {
+    return this.children.findIndex(fn)
+  }
+  
+  reduce<U>(fn: (acc: U, node: ISakuraNode<T>) => U, init: U): U {
+    return this.children.reduce(fn, init)
+  }
+
+}

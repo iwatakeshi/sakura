@@ -1,5 +1,5 @@
 import { Key } from './key';
-import { INode } from "~/shared/types/node";
+import { INode } from "./node";
 
 /**
  * A type representing a cache.

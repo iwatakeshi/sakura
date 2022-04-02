@@ -1,17 +1,19 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "importHelpers": true,
-    "module": "commonjs",
-    "outDir": "lib",
-    "rootDir": "src",
-    "strict": true,
-    "target": "es2018"
+    "target": "ES6",
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./*"]
+    }
   },
-  "include": [
-    "src/**/*"
-  ],
   "exclude": [
-    "output/"
+    "node_modules",
+    "lib"
+  ],
+  "include": [
+    "src"
   ]
 }

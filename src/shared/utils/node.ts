@@ -1,4 +1,4 @@
-import { INode } from "~/shared/types/node";
+import { INode } from "~/src/shared/types/node";
 
 /**
  * Determines if the given value is a node.

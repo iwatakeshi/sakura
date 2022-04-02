@@ -4,10 +4,9 @@
  */
 import { ITreeNode } from "~/structures/n-ary/node";
 import { Key } from "~/shared/types/key";
-import { isKey } from "~/shared/utils/key";
 import { find } from "~/structures/n-ary/utils/find";
 import { Maybe } from "~/shared/types/ts";
-import { TreeFn2 } from "~/structures/n-ary/functional/types/functions";
+import { NodeCache } from "~/shared/types/cache";
 
 function* recurse<T>(node: ITreeNode<T>, order: 'pre' | 'post' = 'pre') {
   if (order === 'pre') {
@@ -26,48 +25,36 @@ function* recurse<T>(node: ITreeNode<T>, order: 'pre' | 'post' = 'pre') {
 type TraverseFn<T, U = T, V extends ITreeNode<U> = ITreeNode<U>> =
   ((input: Maybe<V> | Maybe<V[]>) => Generator<V, void>)
 
-type WalkFn<T, U = T, V extends ITreeNode<U> = ITreeNode<U>> =
-  ((input: Maybe<V> | Maybe<V[]>) => Generator<V, void>)
-
 /**
  * Traverse a tree of nodes.
  * @param tree - The tree to traverse.
- * @param node - The node to start traversing from.
+ * @param key - The key to traverse.
  * @param cache - A cache of visited nodes.
  */
-export function walk<T, U = T>(
-  node: ITreeNode<U>,
-):TreeFn2<T, Generator<ITreeNode<T>, void>>
+export function* walk<T>(
+  tree: ITreeNode<T>[],
+  key?: Key,
+  cache?: NodeCache<ITreeNode<T>>
+): Generator<ITreeNode<T>, void> {
+  const node = find(tree, key, {cache})
+  if (!node) return
 
-export function walk<T, U = T>(
-  key: Key,
-): TreeFn2<T, Generator<ITreeNode<T>, void>>
-
-export function walk<T>(
-  input: ITreeNode<T> | Key,
-): TreeFn2<T, Generator<ITreeNode<T>, void>> {
-  return function* (tree, cache): 
-    Generator<ITreeNode<T>, void> {
-    const node = (isKey(input) ? find(input)(tree, cache): input) as ITreeNode<T>
-    if (!node) return
-    
-    // Walk the tree.
-    function *_walk(_node: ITreeNode<T>) {
-      while (_node) {
-        yield _node as ITreeNode<T>
-        _node = find<T>(_node.parent!)(tree, cache)!
-      }
+  // Walk the tree.
+  function *_walk(_node: ITreeNode<T>) {
+    while (_node) {
+      yield _node as ITreeNode<T>
+      _node = find(tree, _node.parent!, {cache})!
     }
-    
-    if (Array.isArray(tree)) {
-      for (const n of tree) {
-        yield* _walk(n)
-      }
-      return 
-    }
-    
-    yield* _walk(node)
   }
+
+  if (Array.isArray(tree)) {
+    for (const n of tree) {
+      yield* _walk(n)
+    }
+    return
+  }
+
+  yield* _walk(node)
 }
 
 /**

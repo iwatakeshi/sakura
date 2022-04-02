@@ -1,7 +1,6 @@
 import { Maybe } from "~/shared/types/ts";
 import { NodeCache } from "~/shared/types/cache";
 import { Key } from "~/shared/types/key";
-import { isKey } from "~/shared/utils/key";
 import { isNode } from "~/shared/utils/node";
 import { ITreeNode } from "~/structures/n-ary/node";
 
@@ -35,18 +34,6 @@ export function update<T>(
   if (!cache) return
   cache.set(key, node)
 }
-
-/**
- * Removes a node from the cache.
- * @param node - The node to remove.
- * @param cache - The cache to remove the node from.
- * @param deep - Whether to remove the node and all of its children.
- */
-export function remove<T>(
-  cache: Maybe<NodeCache<ITreeNode<T>>>,
-  node: ITreeNode<T>,
-  deep?: boolean
-): void
 /**
  * Removes a node from the cache.
  * @param key - The key of the node to remove.
@@ -56,27 +43,16 @@ export function remove<T>(
 export function remove<T>(
   cache: Maybe<NodeCache<ITreeNode<T>>>,
   key: Key,
-  deep?: boolean
-): void
-/**
- * Removes a node from the cache.
- * @param keyOrNode - The key or node to remove.
- * @param cache - The cache to remove the node from.
- * @param deep - Whether to remove the node and all of its children.
- */
-export function remove<T>(
-  cache: Maybe<NodeCache<ITreeNode<T>>>,
-  keyOrNode: Key | ITreeNode<T>,
   deep = true
 ): void {
   if (!cache) return
-  const node = isKey(keyOrNode) ? cache?.get(keyOrNode) : keyOrNode
+  const node = cache?.get(key)
   if (!node || !isNode(node)) return
   cache.delete(node.key)
 
   if (deep) {
     for (const child of node.children) {
-      remove(cache, child, deep)
+      remove(cache, child.key, deep)
     }
   }
 }

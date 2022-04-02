@@ -1,5 +1,5 @@
 import { Key } from "./key";
-import { Nullable } from "~/shared/types/ts";
+import { Nullable } from "./ts";
 
 /**
  * An interface representing a node in the tree.
