@@ -9,9 +9,7 @@
       "program": "${workspaceFolder}/lib/main.js",
       "trace": true,
       "request": "launch",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
       "type": "pwa-node"
     },
     {
@@ -23,11 +21,7 @@
       "disableOptimisticBPs": true,
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
-      "args": [
-        "jest",
-        "--runInBand",
-        "--watchAll=false"
-      ]
+      "args": ["jest", "--runInBand", "--watchAll=false"]
     }
   ]
 }

@@ -1,0 +1,7 @@
+# Ignore the following files and directories
+docs
+dist
+build
+coverage
+data
+test/fixtures/

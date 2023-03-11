@@ -1,4 +1,5 @@
 # sakura
+
 A unit of a data structure to build elegant trees or cherry blossoms 🌸
 
 [![Node CI](https://github.com/iwatakeshi/sakura/workflows/Node%20CI/badge.svg)](https://github.com/iwatakeshi/sakura/actions?query=workflow%3A%22Node+CI%22)
@@ -6,6 +7,7 @@ A unit of a data structure to build elegant trees or cherry blossoms 🌸
 [![Version](https://img.shields.io/npm/v/@iwatakeshi/sakura.svg)](https://www.npmjs.com/package/@iwatakeshi/sakura)
 [![Downloads/week](https://img.shields.io/npm/dw/@iwatakeshi/sakura.svg)](https://www.npmjs.com/package/@iwatakeshi/sakura)
 [![License](https://img.shields.io/github/license/iwatakeshi/sakura)](https://github.com/iwatakeshi/sakura/blob/master/LICENSE.md)
+
 ## About
 
 Sakura has an elegant `Node` class that wraps some of the familiar APIs we use for arrays. However, instead of arrays, we're dealing with nodes.
@@ -32,7 +34,7 @@ b.push(c)
 
 // Let's search for 'c'!
 console.log(a.search('3'))
-// => 
+// =>
 // Node {
 //   isRoot: false,
 //   name: 'c',
@@ -42,7 +44,6 @@ console.log(a.search('3'))
 //     ...
 //   }
 // }
-
 ```
 
 But wait, there's more!
@@ -76,10 +77,11 @@ e.push(f)
 e.push(g)
 
 console.log(
-  a.search('2')
-   .find(node => node!.id === '5')
-   .map(node => node!.data)
- )
+  a
+    .search('2')
+    .find((node) => node!.id === '5')
+    .map((node) => node!.data)
+)
 // => ['f', 'g']
 ```
 
@@ -91,7 +93,6 @@ By now, I think you get the idea...
 
 ```typescript
 class Node<T = any> {
-
   /**
    * The Node constructor
    * @param name A label for the node.
@@ -104,42 +105,44 @@ class Node<T = any> {
    * Appends a child to the node, and returns the new length of the node's children.
    * @param child The child node to append.
    */
-  push(child: Node): number;
-  
+  push(child: Node): number
+
   /**
    * Removes the last child of the node and returns it.
    */
-  pop(): Maybe<Node>;
+  pop(): Maybe<Node>
 
   /**
    * Inserts a new child at the start the node's children.
    * @param child The child to insert.
    */
-  unshift(child: Node): number;
+  unshift(child: Node): number
 
   /**
    * Removes the first child from the node and returns it.
    */
-  shift(): Maybe<Node>;
+  shift(): Maybe<Node>
 
   /**
    * Removes a child from the node.
    * @param child The child node to remove.
    */
-  remove(child: Node): Maybe<Node>[];
+  remove(child: Node): Maybe<Node>[]
 
   /**
    * Removes a child from the node.
    * @param index The index of the child to remove.
    */
-  removeAt(index: number): Maybe<Node>[];
+  removeAt(index: number): Maybe<Node>[]
 
   /**
    * Returns the children of the node that meet the condition specified in a callback function.
    * @param cb A function that accepts up to three arguments.
    * The filter method calls the callback function one time for each * child of the node.
    */
-  filter(cb: (node: Maybe<Node>, index?: number, nodes?: Maybe<Node>[]) => boolean): Maybe<Node>[];
+  filter(
+    cb: (node: Maybe<Node>, index?: number, nodes?: Maybe<Node>[]) => boolean
+  ): Maybe<Node>[]
 
   /**
    * Calls a defined callback function on each child of the node,
@@ -147,7 +150,9 @@ class Node<T = any> {
    * @param cb A function that accepts up to three arguments.
    * The map method calls the cb function one time for each child of the node.
    */
-  map<T>(cb: (node: Maybe<Node>, index?: number, nodes?: Maybe<Node>[]) => T): T[];
+  map<T>(
+    cb: (node: Maybe<Node>, index?: number, nodes?: Maybe<Node>[]) => T
+  ): T[]
 
   /**
    * Returns the value of the first child of the node where predicate is true, and undefined otherwise.
@@ -155,7 +160,13 @@ class Node<T = any> {
    * until it finds one where predicate returns true. If such a child is found,
    * find immediately returns that child. Otherwise, find returns undefined.
    */
-  find(predicate: (node: Maybe<Node>, index?: number, nodes?: Maybe<Node>[]) => boolean): Maybe<Node>;
+  find(
+    predicate: (
+      node: Maybe<Node>,
+      index?: number,
+      nodes?: Maybe<Node>[]
+    ) => boolean
+  ): Maybe<Node>
 
   /**
    * Returns the index of the first child of the node where predicate is true, and -1 otherwise.
@@ -163,57 +174,62 @@ class Node<T = any> {
    * until it finds one where predicate returns true. If such a child is found,
    * findIndex immediately returns that child index. Otherwise, findIndex returns -1.
    */
-  findIndex(predicate: (node: Maybe<Node>, index?: number, nodes?: Maybe<Node>[]) => boolean): number;
+  findIndex(
+    predicate: (
+      node: Maybe<Node>,
+      index?: number,
+      nodes?: Maybe<Node>[]
+    ) => boolean
+  ): number
 
   /**
    * Returns the index of the first occurrence of a value in the node's children.
    * @param child The child node to locate.
    */
-  indexOf(child: Node): number;
+  indexOf(child: Node): number
 
   /**
    * Determines whether the node includes a certain child, returning true or false as appropriate.
    * @param child The child to search for.
    * @param fromIndex The position in this node's children at which to begin searching for the child.
    */
-  includes(child: Node, fromIndex?: number): boolean;
+  includes(child: Node, fromIndex?: number): boolean
 
   /**
    * Serializes the node into a JSON friendly format.
    */
-  serialize(): NodeSchema;
+  serialize(): NodeSchema
 
   /**
    * Deserializes a JSON friendly format into a Node.
    * @param schema The serialized node schema.
    */
 
-  deserialize(schema: NodeSchema);
+  deserialize(schema: NodeSchema)
   /**
    * Deeply searches for a child node.
    *
    * Note: Search starts from the current node.
    * @param id The id of the node to search for.
    */
-  search(id: string): Maybe<Node>;
-
+  search(id: string): Maybe<Node>
 
   /**
    * Returns the index of the node's position relative to the node's parent.
    *
    * Note: Be sure to check if the node has a parent.
    */
-  get index(): number;
+  get index(): number
 
   /**
    * The parent of the node.
    */
-  get parent(): Maybe<Node>;
+  get parent(): Maybe<Node>
 
   /**
    * Determines whether the node has children.
    */
-  get isParent(): boolean;
+  get isParent(): boolean
 
   /**
    * Deeply searches for a child node.
