@@ -75,5 +75,5 @@ console.log('Difference:')
 printGraph(difference(graph, graph2, equalNode, equalEdge))
 
 console.log()
-console.log('BFS:')
+console.log('Find path:')
 console.log(Graph.findPath(intersection(graph, graph2, equalNode, equalEdge), bob, dave))
